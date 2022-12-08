@@ -3,8 +3,8 @@ locals {
 
   default_site_config = {
     always_on                              = !local.is_consumption
-    application_insights_connection_string = var.application_insights_enabled ? local.app_insights.connection_string : null
-    application_insights_key               = var.application_insights_enabled ? local.app_insights.instrumentation_key : null
+    #application_insights_connection_string = var.application_insights_enabled ? local.app_insights.connection_string : null
+    #application_insights_key               = var.application_insights_enabled ? local.app_insights.instrumentation_key : null
   }
 
   site_config = merge(local.default_site_config, var.site_config)
