@@ -100,12 +100,11 @@ locals {
   }]
 
   # If no VNet integration, allow Function App outbound public IPs
-  function_outbound_ips = var.function_app_vnet_integration_subnet_id == null ? distinct(concat(azurerm_linux_function_app.linux_function.possible_outbound_ip_address_list, azurerm_linux_function_app.linux_function.outbound_ip_address_list)) : []
+  #function_outbound_ips = var.function_app_vnet_integration_subnet_id == null ? distinct(concat(azurerm_linux_function_app.linux_function.possible_outbound_ip_address_list, azurerm_linux_function_app.linux_function.outbound_ip_address_list)) : []
 
   # https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/storage_account_network_rules#ip_rules
   # > Small address ranges using "/31" or "/32" prefix sizes are not supported. These ranges should be configured using individual IP address rules without prefix specified.
-  storage_ips = distinct(flatten([for cidr in distinct(concat(local.function_outbound_ips, var.storage_account_authorized_ips)) :
-    length(regexall("/3[12]$", cidr)) > 0 ? [cidrhost(cidr, 0), cidrhost(cidr, -1)] : [cidr]
+  #storage_ips = distinct(flatten([for cidr in distinct(concat(local.function_outbound_ips, var.storage_account_authorized_ips)) : length(regexall("/3[12]$", cidr)) > 0 ? [cidrhost(cidr, 0), cidrhost(cidr, -1)] : [cidr]
   ]))
 
   #is_local_zip    = length(regexall("^(http(s)?|ftp)://", var.application_zip_package_path != null ? var.application_zip_package_path : 0)) == 0
