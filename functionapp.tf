@@ -1,9 +1,9 @@
 # Data Service Plan
-/* data "azurerm_service_plan" "plan" {
+data "azurerm_service_plan" "plan" {
   name                = element(split("/", var.service_plan_id), 8)
   resource_group_name = var.resource_group_name
 }
- */
+
 # Function App
 resource "azurerm_linux_function_app" "linux_function" {
   name = var.name
