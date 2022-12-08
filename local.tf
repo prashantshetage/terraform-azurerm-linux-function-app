@@ -9,9 +9,9 @@ locals {
 
   site_config = merge(local.default_site_config, var.site_config)
 
-  app_insights = try(data.azurerm_application_insights.app_insights[0], try(azurerm_application_insights.app_insights[0], {}))
+  #app_insights = try(data.azurerm_application_insights.app_insights[0], try(azurerm_application_insights.app_insights[0], {}))
 
-  default_application_settings = merge(
+  default_application_settings = {} /* merge(
     var.application_zip_package_path != null ? {
       # MD5 as query to force function restart on change
       WEBSITE_RUN_FROM_PACKAGE = local.zip_package_url
@@ -20,7 +20,7 @@ locals {
       FUNCTIONS_WORKER_RUNTIME            = null
       WEBSITES_ENABLE_APP_SERVICE_STORAGE = "false"
     } : {},
-  )
+  ) */
 
   default_ip_restrictions_headers = {
     x_azure_fdid      = null
@@ -108,8 +108,8 @@ locals {
     length(regexall("/3[12]$", cidr)) > 0 ? [cidrhost(cidr, 0), cidrhost(cidr, -1)] : [cidr]
   ]))
 
-  is_local_zip    = length(regexall("^(http(s)?|ftp)://", var.application_zip_package_path != null ? var.application_zip_package_path : 0)) == 0
-  zip_package_url = var.application_zip_package_path != null && local.is_local_zip ? format("%s%s&md5=%s", azurerm_storage_blob.package_blob[0].url, data.azurerm_storage_account_sas.package_sas.sas, filemd5(var.application_zip_package_path)) : var.application_zip_package_path
+  #is_local_zip    = length(regexall("^(http(s)?|ftp)://", var.application_zip_package_path != null ? var.application_zip_package_path : 0)) == 0
+  #zip_package_url = var.application_zip_package_path != null && local.is_local_zip ? format("%s%s&md5=%s", azurerm_storage_blob.package_blob[0].url, data.azurerm_storage_account_sas.package_sas.sas, filemd5(var.application_zip_package_path)) : var.application_zip_package_path
 
   storage_account_output = module.storage_account.storage_account #var.storage_account_access_key == null ? module.storage["enabled"].storage_account_properties : null
 }
