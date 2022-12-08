@@ -297,3 +297,9 @@ variable "scm_ip_restriction_headers" {
   type        = map(list(string))
   default     = null
 }
+
+variable "tags" {
+  type        = map(string)
+  description = "(Optional) Tags for the resources"
+  default     = {}
+}
