@@ -52,7 +52,7 @@ variable "storage_uses_managed_identity" {
 }
 
 variable "storage_key_vault_secret_id" {
-  description = -"(Optional) The Key Vault Secret ID, optionally including version, that contains the Connection String to connect to the storage account for this Function App."
+  description = "(Optional) The Key Vault Secret ID, optionally including version, that contains the Connection String to connect to the storage account for this Function App."
   type        = string
   default     = null
 }
