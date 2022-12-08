@@ -22,5 +22,5 @@ module "storage_account" {
   # NSG Flow Log container
   containers_list = var.containers_list
   file_shares     = var.file_shares
-  tags            = var.resource_tags
+  tags            = var.tags
 }

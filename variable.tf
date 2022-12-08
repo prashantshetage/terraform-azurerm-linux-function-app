@@ -39,10 +39,36 @@ variable "function_app_version" {
   default     = 3
 }
 
-variable "storage_account_access_key" {
-  description = "Access key the storage account to use. If null a new storage account is created"
-  type        = string
-  default     = null
+# Storage
+variable "enable_advanced_threat_protection" {
+  default = false
+}
+
+variable "default_action" {
+  default = "Allow"
+}
+
+variable "bypass" {
+  description = "(Optional) Specifies whether traffic is bypassed for Logging/Metrics/AzureServices"
+  type        = list(string)
+  default     = ["Logging", "Metrics", "AzureServices"]
+}
+
+variable "custom_ip_rules" {
+  type    = list(string)
+  default = []
+}
+
+variable "containers_list" {
+  description = "List of containers to create and their access levels."
+  type        = list(object({ name = string, access_type = string }))
+  default     = []
+}
+
+variable "file_shares" {
+  description = "List of containers to create and their access levels."
+  type        = list(object({ name = string, quota = number }))
+  default     = []
 }
 
 variable "storage_uses_managed_identity" {
@@ -57,10 +83,16 @@ variable "storage_key_vault_secret_id" {
   default     = null
 }
 
-variable "storage_account_kind" {
+/* variable "storage_account_kind" {
   description = "Storage Account Kind"
   type        = string
   default     = "StorageV2"
+}
+
+variable "storage_account_access_key" {
+  description = "Access key the storage account to use. If null a new storage account is created"
+  type        = string
+  default     = null
 }
 
 variable "storage_account_min_tls_version" {
@@ -109,7 +141,7 @@ variable "storage_account_authorized_ips" {
   description = "IPs restriction for Function storage account in CIDR format"
   type        = list(string)
   default     = []
-}
+} */
 
 variable "service_plan_id" {
   description = "Id of the App Service Plan for Function App hosting"
