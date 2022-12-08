@@ -74,7 +74,7 @@ variable "file_shares" {
 variable "storage_uses_managed_identity" {
   description = "(Optional) Should the Function App use Managed Identity to access the storage account. Conflicts with storage_account_access_key"
   type        = bool
-  default     = false
+  default     = null
 }
 
 variable "storage_key_vault_secret_id" {
