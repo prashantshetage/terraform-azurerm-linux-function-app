@@ -1,5 +1,5 @@
 module "storage_account" {
-  source               = "git@github.com:prashantshetage/terraform-azurerm-storage-account.git?ref=azurerm_v3"
+  source               = "github.com/prashantshetage/terraform-azurerm-storage-account?ref=azurerm_v3"
   resource_group_name  = var.resource_group_name
   location             = var.location
   storage_account_name = "sa${var.name}"
