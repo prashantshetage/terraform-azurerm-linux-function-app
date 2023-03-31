@@ -56,10 +56,10 @@ resource "azurerm_linux_function_app" "linux_function" {
 
       vnet_route_all_enabled = lookup(site_config.value, "vnet_route_all_enabled", var.function_app_vnet_integration_subnet_id != null)
 
-      ip_restriction              = concat(local.subnets, local.cidrs, local.service_tags)
-      scm_type                    = lookup(site_config.value, "scm_type", null)
-      scm_use_main_ip_restriction = length(var.scm_authorized_ips) > 0 || var.scm_authorized_subnet_ids != null ? false : true
-      scm_ip_restriction          = concat(local.scm_subnets, local.scm_cidrs, local.scm_service_tags)
+      #ip_restriction              = concat(local.subnets, local.cidrs, local.service_tags)
+      #scm_type                    = lookup(site_config.value, "scm_type", null)
+      #scm_use_main_ip_restriction = length(var.scm_authorized_ips) > 0 || var.scm_authorized_subnet_ids != null ? false : true
+      #scm_ip_restriction          = concat(local.scm_subnets, local.scm_cidrs, local.scm_service_tags)
 
       dynamic "application_stack" {
         for_each = lookup(site_config.value, "application_stack", null) == null ? [] : ["application_stack"]
